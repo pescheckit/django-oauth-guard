@@ -15,8 +15,7 @@ from django.core.mail import send_mail
 
 from django_oauth_guard.signals import (
     token_validation_failed, token_refreshed, 
-    session_fingerprint_mismatch, session_age_exceeded,
-    user_inactivity_timeout, token_expired, validation_system_error
+    session_fingerprint_mismatch, validation_system_error
 )
 
 logger = logging.getLogger(__name__)

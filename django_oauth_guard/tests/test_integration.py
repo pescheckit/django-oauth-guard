@@ -1,8 +1,7 @@
-import json
 import time
 import urllib.error
 import urllib.request
-from datetime import datetime, timedelta
+from datetime import timedelta
 from unittest import mock
 
 from allauth.socialaccount.models import SocialAccount, SocialApp, SocialToken

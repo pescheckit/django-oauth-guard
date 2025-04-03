@@ -1,6 +1,5 @@
 import json
 import time
-import urllib.error
 from datetime import timedelta
 from unittest import mock
 

@@ -11,27 +11,20 @@ This includes:
 
 import json
 import time
-import urllib.error
-from datetime import datetime, timedelta
+from datetime import timedelta
 from unittest import mock
 
-from allauth.socialaccount.models import SocialAccount, SocialApp, SocialToken
+from allauth.socialaccount.models import SocialApp
 from django.contrib.auth.models import User
-from django.contrib.sessions.middleware import SessionMiddleware
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.test import RequestFactory, TestCase, override_settings
-from django.urls import reverse
+from django.test import TestCase, override_settings
 from django.utils import timezone
 
 from django_oauth_guard.middleware import OAuthValidationMiddleware
 from django_oauth_guard.signals import (
-    session_age_exceeded,
     session_fingerprint_mismatch,
-    token_expired,
     token_refreshed,
     token_validation_failed,
-    user_inactivity_timeout,
-    validation_system_error,
 )
 from django_oauth_guard.tests.test_integration import ProviderSetupMixin, RequestMixin
 

@@ -10,7 +10,6 @@ from django.contrib.auth.models import User
 from django.contrib.messages.storage.fallback import FallbackStorage
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.http import HttpResponse
-from django.conf import settings
 from django.utils import timezone
 
 from allauth.socialaccount.models import SocialAccount, SocialToken, SocialApp
