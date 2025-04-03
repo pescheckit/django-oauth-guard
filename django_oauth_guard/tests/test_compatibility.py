@@ -47,11 +47,11 @@ class PythonVersionCompatibilityTestCase(TestCase):
 
 
 @unittest.skipIf(
-    DJANGO_VERSION[0] < 2 or DJANGO_VERSION[0] >= 5,
-    "This test is for Django 2.x - 4.x compatibility",
+    DJANGO_VERSION[0] < 4 or DJANGO_VERSION[0] >= 6,
+    "This test is for Django 4.x - 5.x compatibility",
 )
 class DjangoVersionCompatibilityTestCase(TestCase):
-    """Test compatibility with different Django versions"""
+    """Test compatibility with different Django versions (4.x and 5.x)"""
 
     def setUp(self):
         # Create a middleware instance

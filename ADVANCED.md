@@ -266,7 +266,7 @@ pytest --cov=django_oauth_guard  # With coverage
 
 # Using tox for multiple Python/Django versions
 tox                 # All environments
-tox -e py39-django32  # Specific environment
+tox -e py39-django42  # Specific environment
 ```
 
 ### Test Coverage

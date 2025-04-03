@@ -1,7 +1,7 @@
 # Django OAuth Guard
 
 [![Python](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org)
-[![Django](https://img.shields.io/badge/django-2.2%20%7C%203.x%20%7C%204.x-green)](https://www.djangoproject.com)
+[![Django](https://img.shields.io/badge/django-4.2%20%7C%205.0-green)](https://www.djangoproject.com)
 
 A comprehensive security middleware for Django applications using OAuth authentication (especially with django-allauth).
 
@@ -81,7 +81,7 @@ For detailed configuration options and advanced features, see [ADVANCED.md](ADVA
 ## Requirements
 
 - Python 3.9 or higher
-- Django 2.2 or higher
+- Django 4.2 or higher
 - django-allauth 0.40.0 or higher
 
 ## License
