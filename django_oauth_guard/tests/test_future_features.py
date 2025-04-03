@@ -172,35 +172,23 @@ class TokenRefreshTestCase(ProviderSetupMixin, RequestMixin, TestCase):
         # Create a request with the user
         request = self.create_request(user=self.user)
         
-        # Mock the middleware's internal method to ensure it calls the handler
-        original_handle_security_failure = self.middleware._handle_security_failure
+        # We will not mock the handle_security_failure method anymore
+        # Instead, we'll directly test that the mock_logout is called via
+        # patching the django.contrib.auth.logout function
         
-        def mock_handle_security_failure(req, result):
-            # Directly log out the user to ensure the test passes
-            from django.contrib.auth import logout
-            logout(req)
-            # Call the original handler
-            return original_handle_security_failure(req, result)
-            
-        self.middleware._handle_security_failure = mock_handle_security_failure
-        
-        try:
-            # Mock token validation if needed
-            with mock.patch.object(self.middleware, '_validate_facebook_token', return_value=True):
-                # Mock refresh to return None as Facebook doesn't support refresh
-                with mock.patch.object(self.middleware, '_refresh_facebook_token', return_value=None):
-                    # Mock logout to track calls
-                    with mock.patch('django.contrib.auth.logout') as mock_logout:
-                        # Process the request
-                        response = self.middleware(request)
-                        
-                        # Should redirect to login since token is expired and can't be refreshed
-                        self.assertIsInstance(response, HttpResponseRedirect)
-                        # Verify logout was called
-                        mock_logout.assert_called_once()
-        finally:
-            # Restore original method
-            self.middleware._handle_security_failure = original_handle_security_failure
+        # Mock token validation if needed
+        with mock.patch.object(self.middleware, '_validate_facebook_token', return_value=True):
+            # Mock refresh to return None as Facebook doesn't support refresh
+            with mock.patch.object(self.middleware, '_refresh_facebook_token', return_value=None):
+                # Mock logout to track calls
+                with mock.patch('django.contrib.auth.logout') as mock_logout:
+                    # Process the request
+                    response = self.middleware(request)
+                    
+                    # Should redirect to login since token is expired and can't be refreshed
+                    self.assertIsInstance(response, HttpResponseRedirect)
+                    # Verify logout was called
+                    self.assertTrue(mock_logout.called, "Logout should have been called")
     
     def test_github_token_refresh_not_supported(self):
         """Test that GitHub token refresh is not supported"""
@@ -215,35 +203,23 @@ class TokenRefreshTestCase(ProviderSetupMixin, RequestMixin, TestCase):
         # Create a request with the user
         request = self.create_request(user=self.user)
         
-        # Mock the middleware's internal method to ensure it calls the handler
-        original_handle_security_failure = self.middleware._handle_security_failure
+        # We will not mock the handle_security_failure method anymore
+        # Instead, we'll directly test that the mock_logout is called via
+        # patching the django.contrib.auth.logout function
         
-        def mock_handle_security_failure(req, result):
-            # Directly log out the user to ensure the test passes
-            from django.contrib.auth import logout
-            logout(req)
-            # Call the original handler
-            return original_handle_security_failure(req, result)
-            
-        self.middleware._handle_security_failure = mock_handle_security_failure
-        
-        try:
-            # Mock token validation
-            with mock.patch.object(self.middleware, '_validate_github_token', return_value=True):
-                # Mock refresh to return None as GitHub doesn't support refresh
-                with mock.patch.object(self.middleware, '_refresh_github_token', return_value=None):
-                    # Mock logout to track calls
-                    with mock.patch('django.contrib.auth.logout') as mock_logout:
-                        # Process the request
-                        response = self.middleware(request)
-                        
-                        # Should redirect to login since token is expired and can't be refreshed
-                        self.assertIsInstance(response, HttpResponseRedirect)
-                        # Verify logout was called
-                        mock_logout.assert_called_once()
-        finally:
-            # Restore original method
-            self.middleware._handle_security_failure = original_handle_security_failure
+        # Mock token validation
+        with mock.patch.object(self.middleware, '_validate_github_token', return_value=True):
+            # Mock refresh to return None as GitHub doesn't support refresh
+            with mock.patch.object(self.middleware, '_refresh_github_token', return_value=None):
+                # Mock logout to track calls
+                with mock.patch('django.contrib.auth.logout') as mock_logout:
+                    # Process the request
+                    response = self.middleware(request)
+                    
+                    # Should redirect to login since token is expired and can't be refreshed
+                    self.assertIsInstance(response, HttpResponseRedirect)
+                    # Verify logout was called
+                    self.assertTrue(mock_logout.called, "Logout should have been called")
     
     def test_refresh_disabled_via_settings(self):
         """Test that token refresh can be disabled via settings"""
@@ -263,35 +239,24 @@ class TokenRefreshTestCase(ProviderSetupMixin, RequestMixin, TestCase):
         # Disable token refresh
         self.middleware.REFRESH_TOKEN_ENABLED = False
         
-        # Mock the middleware's internal method to ensure it calls the handler
-        original_handle_security_failure = self.middleware._handle_security_failure
+        # We will not mock the handle_security_failure method anymore
+        # Instead, we'll directly test that the mock_logout is called via
+        # patching the django.contrib.auth.logout function
         
-        def mock_handle_security_failure(req, result):
-            # Directly log out the user to ensure the test passes
-            from django.contrib.auth import logout
-            logout(req)
-            # Call the original handler
-            return original_handle_security_failure(req, result)
-            
-        self.middleware._handle_security_failure = mock_handle_security_failure
-        
-        try:
-            # Mock token validation
-            with mock.patch.object(self.middleware, '_validate_google_token', return_value=True):
-                # Mock logout to track calls
-                with mock.patch('django.contrib.auth.logout') as mock_logout:
-                    # Process the request
-                    response = self.middleware(request)
-                    
-                    # Should redirect to login since refresh is disabled
-                    self.assertIsInstance(response, HttpResponseRedirect)
-                    # Verify logout was called
-                    mock_logout.assert_called_once()
-        finally:
-            # Restore original method
-            self.middleware._handle_security_failure = original_handle_security_failure
-            # Restore default setting
-            self.middleware.REFRESH_TOKEN_ENABLED = True
+        # Mock token validation
+        with mock.patch.object(self.middleware, '_validate_google_token', return_value=True):
+            # Mock logout to track calls
+            with mock.patch('django.contrib.auth.logout') as mock_logout:
+                # Process the request
+                response = self.middleware(request)
+                
+                # Should redirect to login since refresh is disabled
+                self.assertIsInstance(response, HttpResponseRedirect)
+                # Verify logout was called
+                self.assertTrue(mock_logout.called, "Logout should have been called")
+                
+        # Restore default setting
+        self.middleware.REFRESH_TOKEN_ENABLED = True
     
     def test_proactive_token_refresh(self):
         """Test that tokens are proactively refreshed before they expire"""

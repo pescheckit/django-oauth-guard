@@ -9,6 +9,7 @@ import json
 import logging
 import requests
 from datetime import datetime, timedelta
+from django.utils import timezone
 
 logger = logging.getLogger(__name__)
 
@@ -100,7 +101,7 @@ def refresh_discord_token(account, token):
             
             if new_token:
                 # Calculate new expiry time
-                new_expires_at = datetime.now() + timedelta(seconds=expires_in)
+                new_expires_at = timezone.now() + timedelta(seconds=expires_in)
                 
                 # Update the token in the database
                 token.token = new_token
@@ -155,7 +156,7 @@ def validate_apple_token(access_token):
         
         # Check expiry
         exp = payload_data.get('exp', 0)
-        current_time = datetime.now().timestamp()
+        current_time = timezone.now().timestamp()
         
         # Token is valid if not expired
         return exp > current_time

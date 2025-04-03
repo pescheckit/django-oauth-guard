@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.contrib.messages import get_messages
 from django.conf import settings
+from django.utils import timezone
 
 from allauth.socialaccount.models import SocialApp, SocialAccount, SocialToken
 
@@ -49,7 +50,7 @@ class FunctionalTestCase(TestCase):
             app=self.app,
             account=self.account,
             token='test-token',
-            expires_at=datetime.now() + timedelta(days=1)
+            expires_at=timezone.now() + timedelta(days=1)
         )
     
     @mock.patch('django_oauth_guard.middleware.OAuthValidationMiddleware._validate_google_token')
@@ -246,7 +247,7 @@ class MultiProviderFunctionalTestCase(TestCase):
                 app=app,
                 account=account,
                 token=f'{provider}-token',
-                expires_at=datetime.now() + timedelta(days=1)
+                expires_at=timezone.now() + timedelta(days=1)
             )
     
     @mock.patch('django_oauth_guard.middleware.OAuthValidationMiddleware._validate_google_token')
