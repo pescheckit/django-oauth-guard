@@ -1,6 +1,7 @@
 """
 Custom signals for OAuth session validator.
 """
+
 import django.dispatch
 
 # Signal sent when a token validation fails

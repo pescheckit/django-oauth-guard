@@ -43,7 +43,8 @@ jobs:
     - name: Test with tox
       run: tox
       env:
-        TOXENV: py${{ matrix.python-version }}-django${{ matrix.django-version }}
+        PYTHON_VERSION: ${{ matrix.python-version }}
+        DJANGO_VERSION: ${{ matrix.django-version }}
         
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3

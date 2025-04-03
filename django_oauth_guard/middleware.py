@@ -727,7 +727,7 @@ class OAuthValidationMiddleware:
             request.add_header("User-Agent", "OAuth-Session-Validator/1.0")
 
             try:
-                with urllib.request.urlopen(request, timeout=5) as response:
+                with urllib.request.urlopen(request, timeout=5):
                     # If we get here, the response is 200 OK
                     is_valid = True
                     # Optionally parse the response if needed
