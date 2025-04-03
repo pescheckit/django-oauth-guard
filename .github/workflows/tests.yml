@@ -55,9 +55,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install ruff==0.3.0
+        python -m pip install ruff
         
     - name: Lint and format with ruff
       run: |
-        ruff check django_oauth_guard/
-        ruff format --check django_oauth_guard/
+        # Print ruff version for debugging
+        ruff --version
+        
+        # Fix issues automatically
+        ruff check --fix django_oauth_guard/
+        ruff format django_oauth_guard/

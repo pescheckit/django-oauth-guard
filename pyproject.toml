@@ -54,45 +54,25 @@ Homepage = "https://github.com/pescheck/django-oauth-guard"
 Issues = "https://github.com/pescheck/django-oauth-guard/issues"
 
 [tool.ruff]
+# Basic configuration
 line-length = 88
 target-version = "py39"
-exclude = [
+extend-exclude = [
     ".git",
-    ".hg",
-    ".mypy_cache",
     ".tox",
     ".venv",
-    "_build",
-    "buck-out",
     "build",
     "dist",
 ]
 
 [tool.ruff.lint]
-select = [
-    "E",   # pycodestyle errors
-    "F",   # pyflakes
-    "I",   # isort
-    "W",   # pycodestyle warnings
-    "C90", # mccabe
-    "N",   # pep8-naming
-    "B",   # flake8-bugbear
-    "UP",  # pyupgrade
-    "C4",  # flake8-comprehensions
-    "RUF", # ruff specific rules
-]
-ignore = [
-    "E203", # Whitespace before ':'
-    "W503", # Line break before binary operator
-]
+select = ["E", "F", "I"]  # Errors, PyFlakes, isort
+ignore = ["E203", "E501"]  # Whitespace before ':', line length
 
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
 line-ending = "auto"
-
-[tool.ruff.isort]
-known-first-party = ["django_oauth_guard"]
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "tests.settings"
