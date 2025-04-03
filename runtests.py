@@ -29,7 +29,7 @@ SETTINGS = {
         'allauth.socialaccount.providers.facebook',
         'allauth.socialaccount.providers.microsoft',
         'allauth.socialaccount.providers.github',
-        'allauth.socialaccount.providers.linkedin',
+        'allauth.socialaccount.providers.linkedin_oauth2',
         
         # Our app
         'django_oauth_guard',
@@ -42,6 +42,9 @@ SETTINGS = {
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        
+        # Required for allauth
+        'allauth.account.middleware.AccountMiddleware',
         
         # This is what we're testing
         'django_oauth_guard.middleware.OAuthValidationMiddleware',
@@ -64,6 +67,8 @@ SETTINGS = {
     'SITE_ID': 1,
     'SECRET_KEY': 'test-key-not-for-production',
     'ROOT_URLCONF': 'tests.urls',
+    'STATIC_URL': '/static/',
+    'STATICFILES_DIRS': [],
     'OAUTH_SESSION_VALIDATOR': {
         'VALIDATION_PROBABILITY': 1.0,
         'VALIDATION_INTERVAL': 0,

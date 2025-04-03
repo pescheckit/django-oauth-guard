@@ -16,9 +16,9 @@ setup(
     description='Enhanced security middleware for Django applications using OAuth authentication',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    author='',
-    author_email='',
-    url='https://github.com/django-oauth-guard',
+    author='Pescheck',
+    author_email='pescheck@example.com',
+    url='https://github.com/pescheck/django-oauth-guard',
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
