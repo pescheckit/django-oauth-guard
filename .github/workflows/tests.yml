@@ -33,7 +33,10 @@ jobs:
         python -m pip install tox tox-gh-actions
         
     - name: Test with tox
-      run: python -m tox -e py$(echo ${{ matrix.python-version }} | tr -d '.')-django$(echo ${{ matrix.django-version }} | tr -d '.')
+      run: tox
+      env:
+        PYTHON_VERSION: ${{ matrix.python-version }}
+        DJANGO_VERSION: ${{ matrix.django-version }}
         
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
