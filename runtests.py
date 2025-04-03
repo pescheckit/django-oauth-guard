@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 import sys
-from django.conf import settings
+
 import django
+from django.conf import settings
 
 # Minimum Django settings required to run tests
 SETTINGS = {

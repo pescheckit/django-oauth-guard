@@ -21,12 +21,11 @@ from django.test import TestCase, override_settings
 from django.utils import timezone
 
 from django_oauth_guard.middleware import OAuthValidationMiddleware
-from django_oauth_guard.signals import (
-    session_fingerprint_mismatch,
-    token_refreshed,
-    token_validation_failed,
-)
-from django_oauth_guard.tests.test_integration import ProviderSetupMixin, RequestMixin
+from django_oauth_guard.signals import (session_fingerprint_mismatch,
+                                        token_refreshed,
+                                        token_validation_failed)
+from django_oauth_guard.tests.test_integration import (ProviderSetupMixin,
+                                                       RequestMixin)
 
 
 class TokenRefreshTestCase(ProviderSetupMixin, RequestMixin, TestCase):

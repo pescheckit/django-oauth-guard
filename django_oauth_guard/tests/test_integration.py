@@ -8,12 +8,10 @@ from allauth.socialaccount.models import SocialAccount, SocialApp, SocialToken
 from allauth.socialaccount.providers.facebook.provider import FacebookProvider
 from allauth.socialaccount.providers.github.provider import GitHubProvider
 from allauth.socialaccount.providers.google.provider import GoogleProvider
-from allauth.socialaccount.providers.linkedin_oauth2.provider import (
-    LinkedInOAuth2Provider as LinkedInProvider,
-)
-from allauth.socialaccount.providers.microsoft.provider import (
-    MicrosoftGraphProvider as MicrosoftProvider,
-)
+from allauth.socialaccount.providers.linkedin_oauth2.provider import \
+    LinkedInOAuth2Provider as LinkedInProvider
+from allauth.socialaccount.providers.microsoft.provider import \
+    MicrosoftGraphProvider as MicrosoftProvider
 from django.contrib.auth.models import User
 from django.contrib.messages.storage.fallback import FallbackStorage
 from django.contrib.sessions.middleware import SessionMiddleware

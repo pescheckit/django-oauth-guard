@@ -9,7 +9,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.test import TestCase, override_settings
 from django.urls import reverse
 
-from django_oauth_guard.tests.test_integration import ProviderSetupMixin, RequestMixin
+from django_oauth_guard.tests.test_integration import (ProviderSetupMixin,
+                                                       RequestMixin)
 
 
 @override_settings(

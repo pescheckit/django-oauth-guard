@@ -1,6 +1,7 @@
-from setuptools import setup, find_packages
 import os
 import re
+
+from setuptools import find_packages, setup
 
 # Read version from __init__.py
 with open(os.path.join(os.path.dirname(__file__), 'django_oauth_guard', '__init__.py')) as f:
@@ -22,7 +23,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        'Django>=2.2',
+        'Django>=4.2',
         'django-allauth>=0.40.0',
     ],
     extras_require={
@@ -30,9 +31,7 @@ setup(
             'pytest>=7.0.0',
             'pytest-django>=4.5.0',
             'pytest-cov>=3.0.0',
-            'black>=22.0.0',
-            'flake8>=5.0.0',
-            'isort>=5.0.0',
+            'ruff>=0.3.0',
             'tox>=4.0.0',
         ],
         'test': [

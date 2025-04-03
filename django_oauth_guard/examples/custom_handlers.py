@@ -14,12 +14,10 @@ from django.dispatch import receiver
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 
-from django_oauth_guard.signals import (
-    session_fingerprint_mismatch,
-    token_refreshed,
-    token_validation_failed,
-    validation_system_error,
-)
+from django_oauth_guard.signals import (session_fingerprint_mismatch,
+                                        token_refreshed,
+                                        token_validation_failed,
+                                        validation_system_error)
 
 logger = logging.getLogger(__name__)
 

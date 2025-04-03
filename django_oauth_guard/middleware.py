@@ -20,15 +20,12 @@ from django.utils.module_loading import import_string
 from django.utils.translation import gettext_lazy as _
 
 # Import signals
-from django_oauth_guard.signals import (
-    session_age_exceeded,
-    session_fingerprint_mismatch,
-    token_expired,
-    token_refreshed,
-    token_validation_failed,
-    user_inactivity_timeout,
-    validation_system_error,
-)
+from django_oauth_guard.signals import (session_age_exceeded,
+                                        session_fingerprint_mismatch,
+                                        token_expired, token_refreshed,
+                                        token_validation_failed,
+                                        user_inactivity_timeout,
+                                        validation_system_error)
 
 logger = logging.getLogger(__name__)
 
